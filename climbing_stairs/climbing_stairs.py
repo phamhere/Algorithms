@@ -4,13 +4,16 @@ import sys
 
 
 def climbing_stairs(n, cache=None):
+    # base cases
     if n <= 1:
         return 1
     elif n == 2:
         return 2
+    # if no cache, then simply do recursive calls for solution
     elif cache is None:
         return climbing_stairs(
             n-1) + climbing_stairs(n-2) + climbing_stairs(n-3)
+    # if cache is available, insert values into cache if that spot is 0
     else:
         if cache[n-1] == 0:
             cache[n-1] = climbing_stairs(n-1, cache)
@@ -18,6 +21,7 @@ def climbing_stairs(n, cache=None):
             cache[n-2] = climbing_stairs(n-2, cache)
         if cache[n-3] == 0:
             cache[n-3] = climbing_stairs(n-3, cache)
+    # calls on cache values
     return cache[n-1] + cache[n-2] + cache[n-3]
 
 
