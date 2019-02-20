@@ -8,7 +8,17 @@ def climbing_stairs(n, cache=None):
         return 1
     elif n == 2:
         return 2
-    return climbing_stairs(n-1) + climbing_stairs(n-2) + climbing_stairs(n-3)
+    elif cache is None:
+        return climbing_stairs(
+            n-1) + climbing_stairs(n-2) + climbing_stairs(n-3)
+    else:
+        if cache[n-1] == 0:
+            cache[n-1] = climbing_stairs(n-1, cache)
+        if cache[n-2] == 0:
+            cache[n-2] = climbing_stairs(n-2, cache)
+        if cache[n-3] == 0:
+            cache[n-3] = climbing_stairs(n-3, cache)
+    return cache[n-1] + cache[n-2] + cache[n-3]
 
 
 """after doing some calculations for simple n's, I see a pattern where it's
